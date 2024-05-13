@@ -1,0 +1,36 @@
+POST http://localhost:8484/unregister?service=io.github.hefrankeleyn.hefrpc.UserService
+Content-Type: application/json
+
+{
+  "schema": "http",
+  "host": "localhost",
+  "port": 8082,
+  "context": "hefrpc",
+  "parameters": {
+    "grey": false,
+    "dc": "bj",
+    "union": "B01"
+  }
+}
+
+###
+POST http://localhost:8484/register?service=io.github.hefrankeleyn.hefrpc.UserService
+Content-Type: application/json
+
+{
+  "schema": "http",
+  "host": "localhost",
+  "port": 8082,
+  "context": "hefrpc",
+  "parameters": {
+    "grey": false,
+    "dc": "bj",
+    "union": "B01"
+  }
+}
+
+###
+GET http://localhost:8484/findAllInstances?service=io.github.hefrankeleyn.hefrpc.UserService
+Accept: application/json
+
+###

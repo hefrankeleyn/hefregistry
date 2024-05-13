@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: hefregistry
+server:
+  port: 8484
