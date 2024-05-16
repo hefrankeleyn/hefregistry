@@ -2,7 +2,10 @@ package io.github.hefrankeleyn.hefregistry.controller;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 import io.github.hefrankeleyn.hefregistry.beans.InstanceMeta;
+import io.github.hefrankeleyn.hefregistry.cluster.Cluster;
+import io.github.hefrankeleyn.hefregistry.cluster.Server;
 import io.github.hefrankeleyn.hefregistry.service.RegistryService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
@@ -25,6 +28,9 @@ public class HefRegisterController {
 
     @Resource
     private RegistryService registryService;
+
+    @Resource
+    private Cluster cluster;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public InstanceMeta register(@RequestParam("service") String service, @RequestBody InstanceMeta instanceMeta) {
@@ -70,6 +76,34 @@ public class HefRegisterController {
         String[] serviceArray = serviceList.toArray(new String[]{});
         return registryService.versions(serviceArray);
     }
+
+    @RequestMapping(value = "/info")
+    public String info() {
+        LOGGER.debug("===> info: {}", cluster.self());
+        return new Gson().toJson(cluster.self());
+    }
+
+    @RequestMapping(value = "/cluster")
+    public List<Server> cluster() {
+        LOGGER.debug("===> cluster: {}", cluster.getServerList());
+        return cluster.getServerList();
+    }
+
+    @RequestMapping(value = "/leader")
+    public Server leader() {
+        LOGGER.debug("===> leader: {}", cluster.leader());
+        return cluster.leader();
+    }
+
+
+
+    @RequestMapping(value = "/sf")
+    public Server sf() {
+        cluster.self().setLeader(true);
+        LOGGER.debug("===> myself: {}", cluster.self());
+        return cluster.self();
+    }
+
 
 
 }

@@ -1,5 +1,6 @@
 package io.github.hefrankeleyn.hefregistry.conf;
 
+import io.github.hefrankeleyn.hefregistry.cluster.Cluster;
 import io.github.hefrankeleyn.hefregistry.health.HealthChecker;
 import io.github.hefrankeleyn.hefregistry.health.HefHealthChecker;
 import io.github.hefrankeleyn.hefregistry.service.RegistryService;
@@ -22,5 +23,10 @@ public class HefRegisterConf {
     @Bean(initMethod = "start", destroyMethod = "stop")
     public HealthChecker healthChecker(RegistryService registryService) {
         return new HefHealthChecker(registryService);
+    }
+
+    @Bean(initMethod = "init")
+    public Cluster cluster(HefRegistryConfProperties hefRegistryConfProperties) {
+        return new Cluster(hefRegistryConfProperties);
     }
 }

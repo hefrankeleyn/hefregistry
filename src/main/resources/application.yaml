@@ -3,3 +3,12 @@ spring:
     name: hefregistry
 server:
   port: 8484
+hefregistry:
+  serverList:
+    - http://localhost:8383
+    - http://localhost:8384
+    - http://localhost:8385
+logging:
+  level:
+    root: info
+    io.github.hefrankeleyn.hefregistry: debug
