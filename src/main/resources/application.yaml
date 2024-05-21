@@ -11,4 +11,4 @@ hefregistry:
 logging:
   level:
     root: info
-    io.github.hefrankeleyn.hefregistry: debug
+    io.github.hefrankeleyn.hefregistry.cluster: debug

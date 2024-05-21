@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface RegistryService {
-    Map<String, Long> TIMESTEMPS = Maps.newConcurrentMap();
 
     InstanceMeta register(String service, InstanceMeta instance);
 

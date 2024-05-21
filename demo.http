@@ -1,4 +1,4 @@
-POST http://localhost:8484/unregister?service=io.github.hefrankeleyn.hefrpc.UserService
+POST http://localhost:8384/unregister?service=io.github.hefrankeleyn.hefrpc.UserService
 Content-Type: application/json
 
 {
@@ -13,14 +13,14 @@ Content-Type: application/json
   }
 }
 
-###
-POST http://localhost:8484/register?service=io.github.hefrankeleyn.hefrpc.UserService
+### register
+POST http://localhost:8383/register?service=io.github.hefrankeleyn.hefrpc.UserService
 Content-Type: application/json
 
 {
   "schema": "http",
   "host": "localhost",
-  "port": 8081,
+  "port": 8082,
   "context": "hefrpc",
   "parameters": {
     "grey": false,
@@ -29,23 +29,31 @@ Content-Type: application/json
   }
 }
 
-###
-GET http://localhost:8484/findAllInstances?service=io.github.hefrankeleyn.hefrpc.UserService
+### findAllInstances 8383
+GET http://localhost:8383/findAllInstances?service=io.github.hefrankeleyn.hefrpc.UserService
+Accept: application/json
+
+### findAllInstances 8384
+GET http://localhost:8384/findAllInstances?service=io.github.hefrankeleyn.hefrpc.UserService
+Accept: application/json
+
+### findAllInstances 8385
+GET http://localhost:8385/findAllInstances?service=io.github.hefrankeleyn.hefrpc.UserService
 Accept: application/json
 
 ###
-GET http://localhost:8484/version?service=io.github.hefrankeleyn.hefrpc.UserService
+GET http://localhost:8383/version?service=io.github.hefrankeleyn.hefrpc.UserService
 Accept: application/json
 
 
 ### renew
-POST http://localhost:8484/renew?service=io.github.hefrankeleyn.hefrpc.UserService
+POST http://localhost:8383/renew?service=io.github.hefrankeleyn.hefrpc.UserService
 Content-Type: application/json
 
 {
   "schema": "http",
   "host": "localhost",
-  "port": 8082,
+  "port": 8085,
   "context": "hefrpc",
   "parameters": {
     "grey": false,
@@ -55,11 +63,11 @@ Content-Type: application/json
 }
 
 ### info
-GET http://localhost:8383/info
+GET http://localhost:8385/info
 Accept: application/json
 
 ### cluster
-GET http://localhost:8385/cluster
+GET http://localhost:8384/cluster
 Accept: application/json
 
 ### cluster
@@ -69,4 +77,8 @@ Accept: application/json
 
 ### sf
 GET http://localhost:8385/sf
+Accept: application/json
+
+### snapshot
+GET http://localhost:8383/snapshot
 Accept: application/json

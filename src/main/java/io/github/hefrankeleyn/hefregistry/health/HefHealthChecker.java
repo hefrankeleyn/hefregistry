@@ -2,6 +2,7 @@ package io.github.hefrankeleyn.hefregistry.health;
 
 import io.github.hefrankeleyn.hefregistry.beans.InstanceMeta;
 import io.github.hefrankeleyn.hefregistry.service.RegistryService;
+import io.github.hefrankeleyn.hefregistry.service.impl.HefRegistryService;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,14 +28,14 @@ public class HefHealthChecker implements HealthChecker{
     public void start() {
         executor.scheduleWithFixedDelay(()->{
             long now = System.currentTimeMillis();
-            for (String serviceAndInstance : RegistryService.TIMESTEMPS.keySet()) {
-                if (now - RegistryService.TIMESTEMPS.get(serviceAndInstance) > timeout) {
+            for (String serviceAndInstance : HefRegistryService.TIMESTEMPS.keySet()) {
+                if (now - HefRegistryService.TIMESTEMPS.get(serviceAndInstance) > timeout) {
                     int index = serviceAndInstance.indexOf("@");
                     String service = serviceAndInstance.substring(0, index);
                     String instance = serviceAndInstance.substring(index + 1);
                     InstanceMeta instanceMeta = InstanceMeta.fromUrl(instance);
                     registryService.unregister(service, instanceMeta);
-                    RegistryService.TIMESTEMPS.remove(serviceAndInstance);
+                    HefRegistryService.TIMESTEMPS.remove(serviceAndInstance);
                 }
             }
         }, 10, 10, TimeUnit.SECONDS);
